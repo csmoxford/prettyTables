@@ -1,0 +1,16 @@
+Package: prettyTables
+Type: Package
+Title: Pretty tables
+Version: 1.02
+Date: 2016-03-08
+Author: Peter Dutton
+Maintainer: Peter Dutton <peter.dutton@ndorms.ox.ac.uk>
+Description: Tabulation of summary statistics. A user interface is provided to assist with creating the tables and pushing them to a word document using the rtf package.
+Depends:
+    rtf,
+    shiny
+Imports:
+    stringr,
+	readstata13
+License: GPL-2
+RoxygenNote: 5.0.1

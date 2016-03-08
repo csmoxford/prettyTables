@@ -1,0 +1,144 @@
+#' @title Creates tables for baseline characteristics or similar tables
+#' @description Takes a dataset and returns a constructed data.frame summarising the variables of interest. This may be subset by strata and display an overall summary. A shiny user interface is provided (\code{\link{shiny_table_values}}). This runs through creating a table and prints r code to the console or a log file to rerun with an rtf wrapper to export directly to word.
+#' @param data Dataset to generate table from
+#' @param var A vector of the columns (in string form) to be used to generate the table from
+#' @param var.names Optional. An alternative (cleaned) list of variable names to use in the table. These may contain spaces
+#' @param var.order Optional. A list containing vectors of strings named using the column names in var. This is used to reorder count data items if the original ordering is not acceptable
+#' @param type A vector of the method to summarise the var
+#' @param strata A string of the column to used to stratify on
+#' @param strata.names Otional. A named vector of alternative strata names
+#' @param strata.count TRUE/FALSE for displaying strata counts at the top of each column
+#' @param overall TRUE/FALSE for including an overall column
+#' @param count "n","miss" or "none" providing the counts, missing values or omitting for each column for numeric variables
+#' @param round A value or vector for the number of significant figures to report the data to
+#' @param nmax The initial number of rows assigned to the data.frame. Trimming is performed so this only needs to be changed if the table will have more than 100 rows
+#' @details
+#' Available methods and values for \strong{Type}:
+#' \tabular{cc}{ "miqr" \tab median (Q25,Q75) \cr "miqrr" \tab median (Q25,Q75)[min,max] \cr "mrng" \tab median (Q0,Q100) \cr "avsd" \tab mean (sd) \cr "avci" \tab mean (confidence interval) \cr "st" \tab count \cr "str" \tab count/total \cr "stp" \tab count (percent) \cr "strp" \tab count/total (percent)
+#' }
+#' @return Returns a data.frame
+#' @examples
+#' # Data
+#' data(iris)
+#'
+#' # This function does not work with factors so convert to string.
+#' iris$Species=as.character(iris$Species)
+#'
+#' # build the table (without strata)
+#' table_values(iris, var=c("Species","Sepal.Length","Sepal.Width","Petal.Length",
+#' "Petal.Width"),var.names=NULL, type=c("str","miqr","miqrr","miqrr","miqrr"), round=1)
+#'
+#' # build the table (with strata)
+#' table_values(iris, var=c("Sepal.Length","Sepal.Width","Petal.Length","Petal.Width"),
+#' var.names=c("Sepal Length","Sepal Width","Petal Length","Petal Width"),
+#' strata="Species", type=c("miqr","miqr","miqr","miqr"), round=1)
+#'
+#' @seealso \code{\link{shiny_table_values}} \code{\link{table_two_by_two}}
+#'
+#' @export table_values
+#' @export shiny_table_values
+
+
+table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NULL,strata.names=NULL,strata.count=TRUE,overall=TRUE,count="n",round=3,nmax=100){
+
+  # Define strata required for table
+  all_strata=c()
+  if(!is.null(strata)){
+    # Add unique strata if required
+    all_strata=unique(as.character(data[[strata]]))
+  }
+
+  # Add an overall strata if required
+  if(overall){
+    # add overall if required
+    all_strata=c(all_strata,"Overall")
+    if(!is.null(strata.names)){
+      if(length(strata.names)!=length(all_strata)){
+        warning("strata.names must include an entry for every strata and overall column. Provided names not used")
+        strata.names=NULL
+      }
+    }
+  } else {
+    if(!is.null(strata.names)){
+      if(length(strata.names)!=length(all_strata)){
+        warning("The length of strata.names does not match the number of strata. Provided names not used")
+        strata.names=NULL
+      }
+    }
+  }
+
+  # Make round the length of the variables to be summarised if vector not given
+  if(length(round)==1){
+    round=rep(round,length(var))
+  }
+  if(length(round)!=length(var)){
+    round=rep(round[1],length(var))
+    warning("The length of round did not match the length of var using round[1] for all values")
+  }
+  # If not var names are given then set to the column names
+  if(is.null(var.names)){
+    var.names=var
+  }
+  if(length(var.names)!=length(var)){
+    stop("The length of var and var.names must be equal")
+  }
+
+  # preallocate a data.frame:
+  tble=matrix("",ncol=length(all_strata)+2,nrow=nmax)
+  tble=data.frame(tble,stringsAsFactors=FALSE)
+  colnames(tble)=c(" ","  ",all_strata)
+  # For each variable to be summarised switch to desired method
+  nxt_row=1
+  for(i in 1:length(var)){
+
+    # name row
+    tble[nxt_row,1]=var.names[i]
+
+    # collect summary data
+    dat=switch(
+      type[i],
+      miqr = .tbl_miqr(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
+      miqrr= .tbl_miqrr(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
+      mrng = .tbl_mrng(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
+      avsd = .tbl_avsd(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
+      avci = .tbl_avci(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
+      st   = .tbl_st(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i]),
+      str  = .tbl_str(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i]),
+      stp  = .tbl_stp(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i]),
+      strp = .tbl_strp(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i])
+      )
+
+    # update table and next row
+    tble = dat$tble
+    nxt_row = dat$nxt_row
+  }
+
+  # add counts for each strata to strata names if required:
+  col_names=c()
+  if(strata.count){
+    for(j in 1:length(all_strata)){
+      if(all_strata[j]=="Overall"){
+        cnt=dim(data)[1]
+      } else {
+        cnt=sum(data[,strata]==all_strata[j])
+      }
+      if(!is.null(strata.names)){
+        col_names=c(col_names,paste0(strata.names[all_strata[j]]," (n=",cnt,")"))
+      } else {
+        col_names=c(col_names,paste0(all_strata[j]," (n=",cnt,")"))
+      }
+    }
+  } else {
+    col_names=all_strata
+  }
+
+
+  colnames(tble)=c(" ","  ",col_names)
+
+  # Remove unused rows:
+  tble=tble[1:(nxt_row-1),]
+
+  return(tble)
+}
+
+

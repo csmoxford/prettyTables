@@ -1,0 +1,10 @@
+buttonInput<-function(id,class,name,...){
+  tags$button(
+    id=id,
+    type="button",
+    class=class,
+    style="width:200px;",
+    HTML(name),
+    ...
+  )
+}
