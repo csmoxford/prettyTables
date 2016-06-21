@@ -1,1 +1,1 @@
-Rscript "I:/Data/Useful Programs/R/prettyTables-package/prettyTables/inst/shiny/prettyTables_gui/run.r"
+Rscript -e "library(prettyTables); shiny_table_values()"
