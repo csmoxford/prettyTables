@@ -23,9 +23,8 @@ If this fails only you need to do the following:
     5. Select 'Environment variables'
     6. In the upper box look for a Variable called PATH (if there isn't one create it in all capitals)
     7. Click edit scroll to the end of what is currently there. Add a semi colon and then paste the path to your R folder. Ok. Ok and all done. Test again.
-2. Go here: I:\Data\Useful Programs\R\prettyTables-package\prettyTables\inst\shiny
-3. Copy the prettyTables.ado file
-4. Open stata and type the command sysdir
+3. Copy the `inst/shiny/prettyTables.ado` file
+4. Open Stata and type the command sysdir
 5. Go to the folder listed under personal (you may need to create this folder)
 6. Paste the prettyTables.ado file to this folder
 7. close all instances of Stata
