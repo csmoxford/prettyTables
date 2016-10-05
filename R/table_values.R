@@ -56,7 +56,9 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   if(overall){
     # add overall if required
     all_strata=c(all_strata,"Overall")
-    strata.names = c(strata.names,"Overall"="Overall")
+    if(!is.null(strata.names)){
+      strata.names = c(strata.names,"Overall"="Overall")
+    }
   }
 
   if(!is.null(strata.names)){
@@ -90,6 +92,19 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   # For each variable to be summarised switch to desired method
   nxt_row=1
   for(i in 1:length(var)){
+    print(var[i])
+print(var.order[[var[i]]])
+    if(!is.null(var.order[[var[i]]])){
+      var.order[[var[i]]] = unique(c(var.order[[var[i]]],data[[var[i]]]))
+    } else {
+      var.order[[var[i]]] = unique(data[[var[i]]])
+    }
+    if("NaN" %in% var.order[[var[i]]]){
+      var.order[[var[i]]] = var.order[[var[i]]][-which(var.order[[var[i]]]=="NaN")]
+    }
+    if(sum(is.nan(var.order[[var[i]]]))>0){
+      var.order[[var[i]]] = var.order[[var[i]]][-which(is.nan(var.order[[var[i]]]))]
+    }
 
     # name row
     tble[nxt_row,1]=var.names[i]
