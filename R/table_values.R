@@ -45,26 +45,26 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   all_strata=c()
   if(!is.null(strata)){
     # Add unique strata if required
-    all_strata=unique(as.character(data[[strata]]))
+    if(!is.null(strata.names)){
+      all_strata=names(strata.names)
+    } else {
+      all_strata=unique(as.character(data[[strata]]))
+    }
   }
 
   # Add an overall strata if required
   if(overall){
     # add overall if required
     all_strata=c(all_strata,"Overall")
-    if(!is.null(strata.names)){
-      if(length(strata.names)!=length(all_strata)){
-        warning("strata.names must include an entry for every strata and overall column. Provided names not used")
-        strata.names=NULL
-      }
+    strata.names = c(strata.names,"Overall"="Overall")
+  }
+
+  if(!is.null(strata.names)){
+    if(length(strata.names)!=length(all_strata)){
+      warning("strata.names must include an entry for every strata.")
     }
-  } else {
-    if(!is.null(strata.names)){
-      if(length(strata.names)!=length(all_strata)){
-        warning("The length of strata.names does not match the number of strata. Provided names not used")
-        strata.names=NULL
-      }
-    }
+
+
   }
 
   # Make round the length of the variables to be summarised if vector not given

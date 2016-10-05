@@ -2,11 +2,11 @@
 
 .tbl_stp=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd){
 
+  data=data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
   if(sum(is.na(data[[var]]))>0){
     data[is.na(data[[var]]),var]="Missing"
   }
   data[data[[var]]=="missing",var]="Missing"
-  data=data[data[[var]]!=NaN,]
 
   # Get variable ordering
   if(var %in% names(var.order)){
@@ -25,6 +25,7 @@
   for(i in st){
     tble[nxt_row,2]=i
     for(j in all_strata){
+      if(dim(data)[1]>0){
       if(j=="Overall"){
         data_sub=data[,var]
       } else {
@@ -38,6 +39,9 @@
 
       tble[nxt_row,j]=paste0(num," (",roundWZero(num*100/den,rnd),"%)")
       #####################################
+      } else {
+        tble[nxt_row,j]="0/0"
+      }
     }
     nxt_row=nxt_row+1
   }

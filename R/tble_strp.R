@@ -2,11 +2,11 @@
 
 .tbl_strp=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd){
 
+  data=data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
   if(sum(is.na(data[[var]]))>0){
     data[is.na(data[[var]]),var]="Missing"
   }
   data[data[[var]]=="missing",var]="Missing"
-  data=data[!is.nan(data[[var]]),]
 
   # Get variable ordering
   if(var %in% names(var.order)){

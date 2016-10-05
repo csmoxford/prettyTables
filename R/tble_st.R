@@ -1,14 +1,14 @@
 # Use this as master for string based entries
 
-.tbl_st=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd){
+.tbl_st = function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd){
 
-
+  data=data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
   if(sum(is.na(data[[var]]))>0){
     data[is.na(data[[var]]),var]="Missing"
   }
   data[data[[var]]=="missing",var]="Missing"
-  data=data[data[[var]]!=NaN,]
 
+print(data[[var]])
   # Get variable ordering
   if(var %in% names(var.order)){
     st=var.order[[var]]
@@ -26,21 +26,25 @@
   for(i in st){
     tble[nxt_row,2]=i
     for(j in all_strata){
-      if(j=="Overall"){
-        data_sub=data[,var]
+      if(dim(data)[1]>0){
+      if(j == "Overall"){
+        data_sub = data[,var]
       } else {
-        data_sub=data[data[strata]==j,var]
+        data_sub = data[data[strata]==j,var]
       }
 
       ####################################
       # section to change for other outputs
-      num=sum(data_sub==i,na.rm=TRUE)
+      num=sum(data_sub == i,na.rm=TRUE)
       # den=length(data_sub)
 
       tble[nxt_row,j]=paste0(num)
       #####################################
+      } else {
+        tble[nxt_row,j]="0"
+      }
     }
-    nxt_row=nxt_row+1
+    nxt_row = nxt_row + 1
   }
 
   return(list(tble=tble,nxt_row=nxt_row))
