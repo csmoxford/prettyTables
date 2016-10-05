@@ -3,10 +3,12 @@
 .tbl_str=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd){
 
   data=data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
-  if(sum(is.na(data[[var]]))>0){
-    data[is.na(data[[var]]),var]="Missing"
+  if(dim(data)[1]>0){
+    if(sum(is.na(data[[var]]))>0){
+      data[is.na(data[[var]]),var]="Missing"
+    }
+    data[data[[var]]=="missing",var]="Missing"
   }
-  data[data[[var]]=="missing",var]="Missing"
 
   # Get variable ordering
   if(var %in% names(var.order)){
