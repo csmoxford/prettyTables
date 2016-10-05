@@ -144,7 +144,11 @@ print(var.order[[var[i]]])
       }
     }
   } else {
-    col_names=all_strata
+    if(!is.null(strata.names)){
+    col_names=strata.names[all_strata]
+    } else {
+      col_names=all_strata
+    }
   }
 
 
