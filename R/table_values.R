@@ -13,6 +13,8 @@
 #' @param round A value or vector for the number of significant figures to report the data to
 #' @param nmax The initial number of rows assigned to the data.frame. Trimming is performed so this only needs to be changed if the table will have more than 100 rows
 #' @details
+#' Values labeled as "" or NA are treated as missing values and are thus listed as such. Values labeled as NaN or "NaN" are treated as not applicable and thus are ignored.
+#'
 #' Available methods and values for \strong{Type}:
 #' \tabular{cc}{ "miqr" \tab median (Q25,Q75) \cr "miqrr" \tab median (Q25,Q75)[min,max] \cr "mrng" \tab median (Q0,Q100) \cr "avsd" \tab mean (sd) \cr "avci" \tab mean (confidence interval) \cr "st" \tab count \cr "str" \tab count/total \cr "stp" \tab count (percent) \cr "strp" \tab count/total (percent)
 #' }
@@ -48,6 +50,10 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
     if(!is.null(strata.names)){
       all_strata=names(strata.names)
     } else {
+      if("" %in% data[[strata]] | sum(is.na(data[[strata]]))>0){
+        data[[strata]][data[[strata]] == "" | is.na(data[[strata]])] = "Missing"
+      }
+
       all_strata=unique(as.character(data[[strata]]))
     }
   }
