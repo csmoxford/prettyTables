@@ -98,8 +98,6 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   # For each variable to be summarised switch to desired method
   nxt_row=1
   for(i in 1:length(var)){
-    print(var[i])
-print(var.order[[var[i]]])
     if(!is.null(var.order[[var[i]]])){
       var.order[[var[i]]] = unique(c(var.order[[var[i]]],data[[var[i]]]))
     } else {
