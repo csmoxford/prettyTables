@@ -40,6 +40,8 @@ Returns a data.frame
 Takes a dataset and returns a constructed data.frame summarising the variables of interest. This may be subset by strata and display an overall summary. A shiny user interface is provided (\code{\link{shiny_table_values}}). This runs through creating a table and prints r code to the console or a log file to rerun with an rtf wrapper to export directly to word.
 }
 \details{
+Values labeled as "" or NA are treated as missing values and are thus listed as such. Values labeled as NaN or "NaN" are treated as not applicable and thus are ignored.
+
 Available methods and values for \strong{Type}:
 \tabular{cc}{ "miqr" \tab median (Q25,Q75) \cr "miqrr" \tab median (Q25,Q75)[min,max] \cr "mrng" \tab median (Q0,Q100) \cr "avsd" \tab mean (sd) \cr "avci" \tab mean (confidence interval) \cr "st" \tab count \cr "str" \tab count/total \cr "stp" \tab count (percent) \cr "strp" \tab count/total (percent)
 }
