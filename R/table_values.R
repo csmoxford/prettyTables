@@ -11,7 +11,6 @@
 #' @param overall TRUE/FALSE for including an overall column
 #' @param count "n","miss" or "none" providing the counts, missing values or omitting for each column for numeric variables
 #' @param round A value or vector for the number of significant figures to report the data to
-#' @param nmax The initial number of rows assigned to the data.frame. Trimming is performed so this only needs to be changed if the table will have more than 100 rows
 #' @details
 #' Values labeled as "" or NA are treated as missing values and are thus listed as such. Values labeled as NaN or "NaN" are treated as not applicable and thus are ignored.
 #'
@@ -41,7 +40,7 @@
 #' @export shiny_table_values
 
 
-table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NULL,strata.names=NULL,strata.count=TRUE,overall=TRUE,count="n",round=3,nmax=100){
+table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NULL,strata.names=NULL,strata.count=TRUE,overall=TRUE,count="n",round=3){
 
   # Define strata required for table
   all_strata=c()
@@ -92,12 +91,14 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   }
 
   # preallocate a data.frame:
-  tble=matrix("",ncol=length(all_strata)+2,nrow=nmax)
+  tble=matrix("",ncol=length(all_strata)+2,nrow=10)
   tble=data.frame(tble,stringsAsFactors=FALSE)
   colnames(tble)=c(" ","  ",all_strata)
   # For each variable to be summarised switch to desired method
   nxt_row=1
   for(i in 1:length(var)){
+    tt=0
+    if(tt==1){
     if(!is.null(var.order[[var[i]]])){
       var.order[[var[i]]] = unique(c(var.order[[var[i]]],data[[var[i]]]))
     } else {
@@ -108,6 +109,7 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
     }
     if(sum(is.nan(var.order[[var[i]]]))>0){
       var.order[[var[i]]] = var.order[[var[i]]][-which(is.nan(var.order[[var[i]]]))]
+    }
     }
 
     # name row

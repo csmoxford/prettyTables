@@ -8,11 +8,15 @@
       data[is.na(data[[var]]),var]="Missing"
     }
     data[data[[var]]=="missing",var]="Missing"
+    data[data[[var]]=="",var]="Missing"
   }
 
   # Get variable ordering
   if(var %in% names(var.order)){
     st=var.order[[var]]
+    if(all(unique(data[[var]] %in% var.order[[var]]))){
+      message("Not all values for", var, "match values provided. Provided values are:", paste(sort(var.order[[var]]),collapse = ", "), "Values found are:", sort(unique(data[[var]])))
+    }
   } else {
     st=sort(unique(data[[var]]))
     if("Other" %in% st | "other" %in% st){

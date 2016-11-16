@@ -6,7 +6,7 @@
 \usage{
 table_values(data, var, var.names = NULL, var.order = list(), type,
   strata = NULL, strata.names = NULL, strata.count = TRUE,
-  overall = TRUE, count = "n", round = 3, nmax = 100)
+  overall = TRUE, count = "n", round = 3)
 }
 \arguments{
 \item{data}{Dataset to generate table from}
@@ -30,8 +30,6 @@ table_values(data, var, var.names = NULL, var.order = list(), type,
 \item{count}{"n","miss" or "none" providing the counts, missing values or omitting for each column for numeric variables}
 
 \item{round}{A value or vector for the number of significant figures to report the data to}
-
-\item{nmax}{The initial number of rows assigned to the data.frame. Trimming is performed so this only needs to be changed if the table will have more than 100 rows}
 }
 \value{
 Returns a data.frame
