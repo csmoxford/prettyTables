@@ -34,10 +34,9 @@
 #' var.names=c("Sepal Length","Sepal Width","Petal Length","Petal Width"),
 #' strata="Species", type=c("miqr","miqr","miqr","miqr"), round=1)
 #'
-#' @seealso \code{\link{shiny_table_values}} \code{\link{table_two_by_two}}
+#' @seealso \code{\link{table_two_by_two}}
 #'
 #' @export table_values
-#' @export shiny_table_values
 
 
 table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NULL,strata.names=NULL,strata.count=TRUE,overall=TRUE,count="n",round=3){

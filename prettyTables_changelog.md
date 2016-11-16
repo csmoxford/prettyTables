@@ -8,3 +8,9 @@
 * Bugfix: Added functionality to the strata names input. This wasn't there in the original version for some reason.
 * Bugfix: Instead of crashing when a string asks for numeric results the type methods now issues a warning instead and skip that variable.
 * Issues: Aware of an issue with read.csv and read.stata13 when these files contain non-ascii characters. R can only handle standard ascii characters. As a result it fails to read the csv files completely and the stata (.dta) files are read without the labels. This problem is beyond the scope of this package and may be beyond the scope of R in general. As a work around ensure that all of the input file are ascii characters to begin with.
+
+## 1.10
+* Removed the shiny app and all relevant dependencies.
+* Removed stata files.
+* Bug fixes to missing data
+* The code now checks that var.labels contain all values found in the variable and shoots a message if this is not true.

@@ -3,11 +3,10 @@
 \alias{prettyTables}
 \docType{package}
 \title{
-Create pretty tables and export to word using the rtf package
-~~ package title ~~
+Create pretty tables 
 }
 \description{
-Tabulation of summary statistics
+Tabulation of summary statistics and some utilities for pretty reporting.
 }
 \details{
 \tabular{ll}{
@@ -18,9 +17,13 @@ Date: \tab 2016-03-08\cr
 License: \tab GPL-2\cr
 }
 
-\bold{List of user friendly shiny apps:}
-
-\code{\link{shiny_table_values}}
+\bold{List of key functions:}
+\itemize{
+\item \code{\link{table_values}}
+\item \code{\link{table_two_by_two}}
+\item \code{\link{roundWZero}}
+\item \code{\link{prettifyPValue}}
+}
 }
 \author{
 Peter Dutton

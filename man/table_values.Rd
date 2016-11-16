@@ -62,6 +62,6 @@ strata="Species", type=c("miqr","miqr","miqr","miqr"), round=1)
 
 }
 \seealso{
-\code{\link{shiny_table_values}} \code{\link{table_two_by_two}}
+\code{\link{table_two_by_two}}
 }
 
