@@ -14,7 +14,7 @@
   # Get variable ordering
   if(var %in% names(var.order)){
     st=var.order[[var]]
-    if(all(unique(sort(data[[var]]) %in% sort(var.order[[var]])))){
+    if(!all(unique(sort(data[[var]])) %in% sort(var.order[[var]]))){
       message("Not all values for", var, "match values provided. Provided values are:", paste(sort(var.order[[var]]),collapse = ", "), "Values found are:", sort(unique(data[[var]])))
     }
   } else {
