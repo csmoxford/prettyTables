@@ -24,7 +24,7 @@
       median=quantile(data_sub,0.5,na.rm =TRUE)
       lq=quantile(data_sub,0.25,na.rm =TRUE)
       uq=quantile(data_sub,0.75,na.rm =TRUE)
-      tble[nxt_row,j]=paste0(roundWZero(median,rnd)," (",roundWZero(lq,rnd),",",roundWZero(uq,rnd),")[",roundWZero(min(data_sub),rnd),",",roundWZero(max(data_sub),rnd),"]")
+      tble[nxt_row,j]=paste0(roundWZero(median,rnd)," (",roundWZero(lq,rnd),",",roundWZero(uq,rnd),")[",roundWZero(min(data_sub,na.rm =TRUE),rnd),",",roundWZero(max(data_sub,na.rm =TRUE),rnd),"]")
       #################################
 
     }
