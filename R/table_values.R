@@ -162,6 +162,8 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   # Remove unused rows:
   tble=tble[1:(nxt_row-1),]
 
+  tble[is.na(tble[,1]),1] = ""
+
   return(tble)
 }
 
