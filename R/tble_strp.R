@@ -31,19 +31,23 @@
   for(i in st){
     tble[nxt_row,2]=i
     for(j in all_strata){
-      if(j=="Overall"){
-        data_sub=data[,var]
+      if(dim(data)[1]>0){
+        if(j=="Overall"){
+          data_sub=data[,var]
+        } else {
+          data_sub=data[data[strata]==j,var]
+        }
+
+        ####################################
+        # section to change for other outputs
+        num=sum(data_sub==i,na.rm=TRUE)
+        den=length(data_sub)
+
+        tble[nxt_row,j]=paste0(num,"/",den," (",roundWZero(num*100/den,rnd),"%)")
+        #####################################
       } else {
-        data_sub=data[data[strata]==j,var]
+        tble[nxt_row,j]="0/0"
       }
-
-      ####################################
-      # section to change for other outputs
-      num=sum(data_sub==i,na.rm=TRUE)
-      den=length(data_sub)
-
-      tble[nxt_row,j]=paste0(num,"/",den," (",roundWZero(num*100/den,rnd),"%)")
-      #####################################
     }
     nxt_row=nxt_row+1
   }
