@@ -42,29 +42,37 @@
 
 table_two_by_two <- function(data,var,var2,var.name=NULL,var.name2=NULL,var.order=NULL,var.order2=NULL,type,strata=NULL,strata.names=NULL,strata.count=TRUE,overall=TRUE,count="n",round=3,nmax=100){
 
-  # Define strata required for table
+  #  # Define strata required for table
   all_strata=c()
   if(!is.null(strata)){
     # Add unique strata if required
-    all_strata=unique(as.character(data[[strata]]))
+    if(!is.null(strata.names)){
+      all_strata=names(strata.names)
+    } else {
+      if("" %in% data[[strata]] | sum(is.na(data[[strata]]))>0){
+        data[[strata]][data[[strata]] == "" | is.na(data[[strata]])] = "Missing"
+      }
+
+      all_strata=unique(as.character(data[[strata]]))
+    }
   }
 
   # Add an overall strata if required
   if(overall){
     # add overall if required
-    all_strata=c(all_strata,"Overall")
+    if(!"Overall" %in% all_strata){
+      all_strata=c(all_strata,"Overall")
+    }
     if(!is.null(strata.names)){
-      if(length(strata.names)!=length(all_strata)){
-        warning("strata.names must include an entry for every strata and overall column. Provided names not used")
-        strata.names=NULL
+      if(!"Overall" %in% names(strata.names)){
+        strata.names = c(strata.names,"Overall"="Overall")
       }
     }
-  } else {
-    if(!is.null(strata.names)){
-      if(length(strata.names)!=length(all_strata)){
-        warning("The length of strata.names does not match the number of strata. Provided names not used")
-        strata.names=NULL
-      }
+  }
+
+  if(!is.null(strata.names)){
+    if(length(strata.names)!=length(all_strata)){
+      warning("If provided, strata.names must include an entry for every strata.")
     }
   }
 

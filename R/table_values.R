@@ -59,18 +59,20 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   # Add an overall strata if required
   if(overall){
     # add overall if required
-    all_strata=c(all_strata,"Overall")
+    if(!"Overall" %in% all_strata){
+      all_strata=c(all_strata,"Overall")
+    }
     if(!is.null(strata.names)){
-      strata.names = c(strata.names,"Overall"="Overall")
+      if(!"Overall" %in% names(strata.names)){
+        strata.names = c(strata.names,"Overall"="Overall")
+      }
     }
   }
 
   if(!is.null(strata.names)){
     if(length(strata.names)!=length(all_strata)){
-      warning("strata.names must include an entry for every strata.")
+      warning("If provided, strata.names must include an entry for every strata.")
     }
-
-
   }
 
   # Make round the length of the variables to be summarised if vector not given
