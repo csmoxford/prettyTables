@@ -43,8 +43,11 @@
         # section to change for other outputs
         num=sum(data_sub==i,na.rm=TRUE)
         den=length(data_sub)
-
-        tble[nxt_row,j]=paste0(num," (",roundWZero(num*100/den,rnd),"%)")
+        if(den > 0){
+          tble[nxt_row,j]=paste0(num," (",roundWZero(num*100/den,rnd),"%)")
+        } else {
+          tble[nxt_row,j]="0"
+        }
         #####################################
       } else {
         tble[nxt_row,j]="0"
