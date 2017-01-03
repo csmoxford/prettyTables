@@ -1,6 +1,6 @@
 # Use this as master for string based entries
 
-.tbl_str=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd){
+.tbl_str=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd, messages){
 
   data=data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
   if(dim(data)[1]>0){
@@ -14,8 +14,8 @@
   # Get variable ordering
   if(var %in% names(var.order)){
     st=var.order[[var]]
-    if(!all(unique(sort(data[[var]])) %in% sort(var.order[[var]]))){
-      message("Not all values for", var, "match values provided. Provided values are:", paste(sort(var.order[[var]]),collapse = ", "), "Values found are:", sort(unique(data[[var]])))
+    if(!all(unique(sort(data[[var]])) %in% sort(var.order[[var]]))  & messages){
+      message("Not all values for ", var, " match values provided. Provided values are: ", paste(sort(var.order[[var]]),collapse = ", "), "Values found are: ", paste(sort(unique(data[[var]])),collapse = ", "))
     }
   } else {
     st=sort(unique(data[[var]]))
