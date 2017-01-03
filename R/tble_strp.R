@@ -1,6 +1,6 @@
 # Use this as master for string based entries
 
-.tbl_strp=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd,messages, messages){
+.tbl_strp=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd,messages){
 
   data=data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
   if(dim(data)[1]>0){

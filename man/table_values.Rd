@@ -6,7 +6,7 @@
 \usage{
 table_values(data, var, var.names = NULL, var.order = list(), type,
   strata = NULL, strata.names = NULL, strata.count = TRUE,
-  overall = TRUE, count = "n", round = 3)
+  overall = TRUE, count = "n", round = 3, messages = FALSE)
 }
 \arguments{
 \item{data}{Dataset to generate table from}
@@ -30,6 +30,8 @@ table_values(data, var, var.names = NULL, var.order = list(), type,
 \item{count}{"n","miss" or "none" providing the counts, missing values or omitting for each column for numeric variables}
 
 \item{round}{A value or vector for the number of significant figures to report the data to}
+
+\item{messages}{TRUE/FALSE report messages for missing row names in var.order}
 }
 \value{
 Returns a data.frame
