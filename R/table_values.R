@@ -40,14 +40,14 @@
 #' @export table_values
 
 
-table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NULL,strata.names=NULL,strata.count=TRUE,overall=TRUE,count="n",round=3, messages = FALSE){
+table_values <- function(data, var, var.names = NULL, var.order=list(), type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE){
 
   # Define strata required for table
   all_strata=c()
   if(!is.null(strata)){
     # Add unique strata if required
     if(!is.null(strata.names)){
-      all_strata=names(strata.names)
+      all_strata = names(strata.names)
     } else {
       if("" %in% data[[strata]] | sum(is.na(data[[strata]]))>0){
         data[[strata]][data[[strata]] == "" | is.na(data[[strata]])] = "Missing"
@@ -77,30 +77,31 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   }
 
   # Make round the length of the variables to be summarised if vector not given
-  if(length(round)==1){
+  if(length(round) == 1){
     round=rep(round,length(var))
   }
-  if(length(round)!=length(var)){
-    round=rep(round[1],length(var))
+  if(length(round) != length(var)){
+    round = rep(round[1],length(var))
     warning("The length of round did not match the length of var using round[1] for all values")
   }
   # If not var names are given then set to the column names
   if(is.null(var.names)){
-    var.names=var
+    var.names = var
   }
-  if(length(var.names)!=length(var)){
+  if(length(var.names) != length(var)){
     stop("The length of var and var.names must be equal")
   }
 
   # preallocate a data.frame:
-  tble=matrix("",ncol=length(all_strata)+2,nrow=10)
-  tble=data.frame(tble,stringsAsFactors=FALSE)
-  colnames(tble)=c(" ","  ",all_strata)
+  tble = matrix("",ncol=length(all_strata)+2,nrow=10)
+  tble = data.frame(tble,stringsAsFactors=FALSE)
+  colnames(tble) = c(" ","  ",all_strata)
   # For each variable to be summarised switch to desired method
-  nxt_row=1
+
+  nxt_row = 1
   for(i in 1:length(var)){
-    tt=0
-    if(tt==1){
+    tt = 0
+    if(tt == 1){
     if(!is.null(var.order[[var[i]]])){
       var.order[[var[i]]] = unique(c(var.order[[var[i]]],data[[var[i]]]))
     } else {
@@ -115,10 +116,10 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
     }
 
     # name row
-    tble[nxt_row,1]=var.names[i]
+    tble[nxt_row, 1] = var.names[i]
 
     # collect summary data
-    dat=switch(
+    dat = switch(
       type[i],
       miqr = .tbl_miqr(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
       miqrr= .tbl_miqrr(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
@@ -141,31 +142,31 @@ table_values <- function(data,var,var.names=NULL,var.order=list(),type,strata=NU
   if(strata.count){
     for(j in 1:length(all_strata)){
       if(all_strata[j]=="Overall"){
-        cnt=dim(data)[1]
+        cnt = dim(data)[1]
       } else {
-        cnt=sum(data[,strata]==all_strata[j])
+        cnt = sum(data[,strata]==all_strata[j])
       }
       if(!is.null(strata.names)){
-        col_names=c(col_names,paste0(strata.names[all_strata[j]]," (n=",cnt,")"))
+        col_names = c(col_names,paste0(strata.names[all_strata[j]]," (n=",cnt,")"))
       } else {
-        col_names=c(col_names,paste0(all_strata[j]," (n=",cnt,")"))
+        col_names = c(col_names,paste0(all_strata[j]," (n=",cnt,")"))
       }
     }
   } else {
     if(!is.null(strata.names)){
-    col_names=strata.names[all_strata]
+    col_names = strata.names[all_strata]
     } else {
-      col_names=all_strata
+      col_names = all_strata
     }
   }
 
-
-  colnames(tble)=c(" ","  ",col_names)
+print(dim(tble))
+  colnames(tble) = c(" ", "  ", col_names)
 
   # Remove unused rows:
-  tble=tble[1:(nxt_row-1),]
+  tble = tble[1:(nxt_row-1), ]
 
-  tble[is.na(tble[,1]),1] = ""
+  tble[is.na(tble[,1]), 1] = ""
 
   return(tble)
 }
