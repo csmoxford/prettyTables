@@ -1,8 +1,7 @@
-# Use this as master for string based entries
 
-.tbl_stp=function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd, messages){
+.tbl_stp = function(tble,strata,all_strata,data,var,var.order,type,nxt_row,rnd, messages){
 
-  data=data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
+  data = data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
   if(dim(data)[1]>0){
     if(sum(is.na(data[[var]]))>0){
       data[is.na(data[[var]]),var]="Missing"
@@ -16,48 +15,45 @@
   if(var %in% names(var.order)){
     st=var.order[[var]]
     if(!all(unique(sort(data[[var]])) %in% sort(var.order[[var]]))  & messages){
-      message("Not all values for ", var, " match values provided. Provided values are: ", paste(sort(var.order[[var]]),collapse = ", "), "Values found are: ", paste(sort(unique(data[[var]])),collapse = ", "))
+      message("Not all values for ", var, " match values provided. Provided values are: ", paste(sort(var.order[[var]]),collapse = ", "), " Values found are: ", paste(sort(unique(data[[var]])),collapse = ", "))
     }
   } else {
-    st=sort(unique(data[[var]]))
-    if("Other" %in% st | "other" %in% st){
-      which.other=ifelse("Other" %in% st,"Other","other")
-      st=c(st[-which(st==which.other)],which.other)
+    st = sort(unique(data[[var]]))
+    if("Other" %in% st | "other" %in% st) {
+      which.other = ifelse("Other" %in% st, "Other", "other")
+      st = c(st[-which(st == which.other)], which.other)
     }
-    if("Missing" %in% st){
-      st=c(st[-which(st=="Missing")],"Missing")
+    if("Missing" %in% st) {
+      st = c(st[-which(st == "Missing")], "Missing")
     }
   }
 
   for(i in st){
-    tble[nxt_row,2]=i
+    tble[nxt_row, 2] = i
     for(j in all_strata){
       if(dim(data)[1]>0){
-        if(j=="Overall"){
-          data_sub=data[,var]
+        if(j == "Overall"){
+          data_sub = data[, var]
         } else {
-          data_sub=data[data[strata]==j,var]
+          data_sub = data[data[strata] == j, var]
         }
 
         ####################################
         # section to change for other outputs
-        num=sum(data_sub==i,na.rm=TRUE)
-        den=length(data_sub)
-        if(den > 0){
-          tble[nxt_row,j]=paste0(num," (",roundWZero(num*100/den,rnd),"%)")
+        num = sum(data_sub == i, na.rm = TRUE)
+        den = length(data_sub)
+        if(den > 0) {
+          tble[nxt_row, j] = paste0(num, " (", roundWZero(num * 100 / den, rnd), "%)")
         } else {
-          tble[nxt_row,j]="0"
+          tble[nxt_row, j] = "0"
         }
         #####################################
       } else {
-        tble[nxt_row,j]="0"
+        tble[nxt_row, j] = "0"
       }
     }
-    nxt_row=nxt_row+1
+    nxt_row = nxt_row + 1
   }
 
-
-
-  return(list(tble=tble,nxt_row=nxt_row))
-
+  return(list(tble = tble, nxt_row = nxt_row))
 }

@@ -38,9 +38,7 @@
 #'@seealso \code{\link{table_values}}
 #'
 #' @export table_two_by_two
-
-
-table_two_by_two <- function(data,var, var2, var.name = NULL, var.name2 = NULL, var.order = NULL, var.order2 = NULL, type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE){
+table_two_by_two = function(data,var, var2, var.name = NULL, var.name2 = NULL, var.order = NULL, var.order2 = NULL, type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE){
 
   #  # Define strata required for table
   all_strata=c()

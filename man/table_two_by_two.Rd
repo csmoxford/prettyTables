@@ -7,7 +7,7 @@
 table_two_by_two(data, var, var2, var.name = NULL, var.name2 = NULL,
   var.order = NULL, var.order2 = NULL, type, strata = NULL,
   strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n",
-  round = 3, nmax = 100)
+  round = 3, messages = TRUE)
 }
 \arguments{
 \item{data}{Dataset to generate table from}
@@ -38,7 +38,7 @@ table_two_by_two(data, var, var2, var.name = NULL, var.name2 = NULL,
 
 \item{round}{A value or vector for the number of significant figures to report the data to}
 
-\item{nmax}{The initial number of rows assigned to the data.frame. Trimming is performed so this only needs to be changed if the table will have more than 100 rows}
+\item{messages}{TRUE/FALSE report messages for missing row names in var.order}
 }
 \value{
 Returns a data.frame
