@@ -75,32 +75,32 @@ table_two_by_two = function(data,var, var2, var.name = NULL, var.name2 = NULL, v
   }
 
   # Make round the length of the variables to be summarised if vector not given
-  if(length(round)==1){
-    round=rep(round,length(var))
+  if(length(round) == 1) {
+    round = rep(round,length(var))
   }
-  if(length(round)!=length(var)){
-    round=rep(round[1],length(var))
+  if(length(round)!=length(var)) {
+    round = rep(round[1], length(var))
     warning("The length of round did not match the length of var using round[1] for all values")
   }
   # If not var names are given then set to the column names
-  if(is.null(var.name)){
-    var.name=var
+  if(is.null(var.name)) {
+    var.name = var
   }
-  if(is.null(var.name2)){
-    var.name2=var2
+  if(is.null(var.name2)) {
+    var.name2 = var2
   }
 
   # variable ordering if not provided
-  if(is.null(var.order)){
-    var.order=sort(unique(data[,var]))
+  if(is.null(var.order)) {
+    var.order = sort(unique(data[,var]))
   }
 
   #
-  if(!is.null(var.order2)){
-    if(!(class(var.order2) %in% "list")){
-      var.ord=list()
-      var.ord[[var2]]=var.order2
-      var.order2=var.ord
+  if(!is.null(var.order2)) {
+    if(!(class(var.order2) %in% "list")) {
+      var.ord = list()
+      var.ord[[var2]] = var.order2
+      var.order2 = var.ord
     }
   }
 
@@ -116,6 +116,7 @@ table_two_by_two = function(data,var, var2, var.name = NULL, var.name2 = NULL, v
 
     # name row
     tble[nxt_row,1] = j
+
 
     # subset the data
     dataSub = data[j == data[,var], ]

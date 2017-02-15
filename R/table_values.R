@@ -38,7 +38,7 @@
 #' @seealso \code{\link{table_two_by_two}}
 #'
 #' @export table_values
-table_values = function(data, var, var.names = NULL, var.order=list(), type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE){
+table_values = function(data, var, var.names = NULL, var.order=list(), type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE, zeros = TRUE){
 
   # Define strata required for table
   all_strata=c()
@@ -124,10 +124,10 @@ table_values = function(data, var, var.names = NULL, var.order=list(), type, str
       mrng = .tbl_mrng(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
       avsd = .tbl_avsd(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
       avci = .tbl_avci(tble,strata,all_strata,data,var[i],var.order,type[i],count,nxt_row,round[i]),
-      st   = .tbl_st(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i], messages),
-      str  = .tbl_str(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i], messages),
-      stp  = .tbl_stp(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i], messages),
-      strp = .tbl_strp(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i], messages)
+      st   = .tbl_st(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i], messages, zeros),
+      str  = .tbl_str(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i], messages, zeros),
+      stp  = .tbl_stp(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i], messages, zeros),
+      strp = .tbl_strp(tble,strata,all_strata,data,var[i],var.order,type[i],nxt_row,round[i], messages, zeros)
       )
 
     # update table and next row

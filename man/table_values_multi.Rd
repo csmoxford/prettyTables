@@ -30,6 +30,8 @@ table_values_multi(data, vars, var.order = c(), type, strata = NULL,
 \item{round}{A value or vector for the number of significant figures to report the data to}
 
 \item{messages}{TRUE/FALSE report messages for missing row names in var.order}
+
+\item{zeros}{TRUE/FALSE report zeros (TRUE) or leave cell blank?}
 }
 \value{
 Returns a data.frame

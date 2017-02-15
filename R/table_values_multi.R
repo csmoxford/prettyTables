@@ -11,6 +11,7 @@
 #' @param count "n","miss" or "none" providing the counts, missing values or omitting for each column for numeric variables
 #' @param round A value or vector for the number of significant figures to report the data to
 #' @param messages TRUE/FALSE report messages for missing row names in var.order
+#' @param zeros TRUE/FALSE report zeros (TRUE) or leave cell blank?
 #' @details
 #' Values labeled as "" or NA are ignored
 #'

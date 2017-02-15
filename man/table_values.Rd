@@ -6,7 +6,8 @@
 \usage{
 table_values(data, var, var.names = NULL, var.order = list(), type,
   strata = NULL, strata.names = NULL, strata.count = TRUE,
-  overall = TRUE, count = "n", round = 3, messages = TRUE)
+  overall = TRUE, count = "n", round = 3, messages = TRUE,
+  zeros = TRUE)
 }
 \arguments{
 \item{data}{Dataset to generate table from}

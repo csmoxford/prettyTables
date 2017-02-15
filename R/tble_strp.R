@@ -1,5 +1,5 @@
 
-.tbl_strp = function(tble, strata, all_strata, data, var, var.order, type, nxt_row, rnd, messages){
+.tbl_strp = function(tble, strata, all_strata, data, var, var.order, type, nxt_row, rnd, messages, zeros){
 
   data = data[!is.nan(data[[var]]) & !(data[[var]] == "NaN"),]
   if(dim(data)[1] > 0) {
@@ -41,7 +41,9 @@
         # section to change for other outputs
         num = sum(data_sub == i, na.rm=TRUE)
         den = length(data_sub)
-
+        if(num == 0 & !zeros){
+          tble[nxt_row, j] = ""
+        }
         if(den > 0) {
           tble[nxt_row, j] = paste0(num, "/", den," (", roundWZero(num * 100 / den, rnd), "%)")
         } else {
