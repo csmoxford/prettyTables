@@ -15,6 +15,7 @@
 #' @param count "n","miss" or "none" providing the counts, missing values or omitting for each column for numeric variables
 #' @param round A value or vector for the number of significant figures to report the data to
 #' @param messages TRUE/FALSE report messages for missing row names in var.order
+#' @param zeros TRUE/FALSE whether to print zeros if none are found defaults to FALSE.
 #' @details Available methods and values for \strong{Type}:
 #' \tabular{cc}{ "miqr" \tab median (Q25,Q75) \cr "miqrr" \tab median (Q25,Q75)[min,max] \cr "mrng" \tab median (Q0,Q100) \cr "avsd" \tab mean (sd) \cr "avci" \tab mean (confidence interval) \cr "st" \tab count \cr "str" \tab count/total \cr "stp" \tab count (percent) \cr "strp" \tab count/total (percent)
 #' }
@@ -38,7 +39,7 @@
 #'@seealso \code{\link{table_values}}
 #'
 #' @export table_two_by_two
-table_two_by_two = function(data,var, var2, var.name = NULL, var.name2 = NULL, var.order = NULL, var.order2 = NULL, type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE){
+table_two_by_two = function(data,var, var2, var.name = NULL, var.name2 = NULL, var.order = NULL, var.order2 = NULL, type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE, zeros = FALSE){
 
   #  # Define strata required for table
   all_strata=c()
@@ -128,10 +129,10 @@ table_two_by_two = function(data,var, var2, var.name = NULL, var.name2 = NULL, v
       mrng = .tbl_mrng(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round),
       avsd = .tbl_avsd(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round),
       avci = .tbl_avci(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round),
-      st   = .tbl_st(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round, messages),
-      str  = .tbl_str(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round, messages),
-      stp  = .tbl_stp(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round, messages),
-      strp = .tbl_strp(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round, messages)
+      st   = .tbl_st(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round, messages, zeros),
+      str  = .tbl_str(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round, messages, zeros),
+      stp  = .tbl_stp(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round, messages, zeros),
+      strp = .tbl_strp(tble, strata, all_strata, dataSub, var2, var.order2, type, nxt_row, round, messages, zeros)
     )
     # update table and next row
     tble = dat$tble
