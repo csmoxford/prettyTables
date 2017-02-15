@@ -44,11 +44,12 @@
         den = length(data_sub)
         if(num == 0 & !zeros){
             tble[nxt_row, j] = ""
-          }
-        if(den > 0 & num > 0) {
-          tble[nxt_row, j] = paste0(num, " (", roundWZero(num * 100 / den, rnd), "%)")
         } else {
-          tble[nxt_row, j] = "0"
+          if(den > 0 & num > 0) {
+            tble[nxt_row, j] = paste0(num, " (", roundWZero(num * 100 / den, rnd), "%)")
+          } else {
+            tble[nxt_row, j] = "0"
+          }
         }
         #####################################
       } else {
