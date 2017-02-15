@@ -12,6 +12,7 @@
 #' @param count "n","miss" or "none" providing the counts, missing values or omitting for each column for numeric variables
 #' @param round A value or vector for the number of significant figures to report the data to
 #' @param messages TRUE/FALSE report messages for missing row names in var.order
+#' @param zeros TRUE/FALSE whether to print zeros if none are found defaults to FALSE.
 #' @details
 #' Values labeled as "" or NA are treated as missing values and are thus listed as such. Values labeled as NaN or "NaN" are treated as not applicable and thus are ignored.
 #'
