@@ -53,7 +53,11 @@
         }
         #####################################
       } else {
-        tble[nxt_row, j] = "0"
+        if(!zeros){
+          tble[nxt_row, j] = ""
+        } else {
+          tble[nxt_row, j] = "0"
+        }
       }
     }
     nxt_row = nxt_row + 1
