@@ -39,7 +39,7 @@
 #' @seealso \code{\link{table_two_by_two}}
 #'
 #' @export table_values
-table_values = function(data, var, var.names = NULL, var.order = list(), type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE, zeros = FALSE){
+table_values = function(data, var, var.names = NULL, var.order = list(), type, strata = NULL, strata.names = NULL, strata.count = TRUE, overall = TRUE, count = "n", round = 3, messages = TRUE, zeros = TRUE){
 
   # Define strata required for table
   all_strata=c()

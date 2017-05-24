@@ -48,7 +48,7 @@
           if(den > 0 & num > 0) {
             tble[nxt_row, j] = paste0(num, " (", roundWZero(num * 100 / den, rnd), "%)")
           } else {
-            tble[nxt_row, j] = "0"
+            tble[nxt_row, j] = "0 (0%)"
           }
         }
         #####################################
@@ -56,7 +56,7 @@
         if(!zeros){
           tble[nxt_row, j] = ""
         } else {
-          tble[nxt_row, j] = "0"
+          tble[nxt_row, j] = "0 (0%)"
         }
       }
     }

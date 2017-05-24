@@ -47,12 +47,12 @@
         if(den > 0) {
           tble[nxt_row, j] = paste0(num, "/", den," (", roundWZero(num * 100 / den, rnd), "%)")
         } else {
-          tble[nxt_row, j] = "0/0"
+          tble[nxt_row, j] = "0/0 (0%)"
         }
 
         #####################################
       } else {
-        tble[nxt_row, j] = "0/0"
+        tble[nxt_row, j] = "0/0 (0%)"
       }
     }
     nxt_row = nxt_row + 1

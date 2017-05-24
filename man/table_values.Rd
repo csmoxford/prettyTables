@@ -7,7 +7,7 @@
 table_values(data, var, var.names = NULL, var.order = list(), type,
   strata = NULL, strata.names = NULL, strata.count = TRUE,
   overall = TRUE, count = "n", round = 3, messages = TRUE,
-  zeros = TRUE)
+  zeros = FALSE)
 }
 \arguments{
 \item{data}{Dataset to generate table from}
@@ -33,6 +33,8 @@ table_values(data, var, var.names = NULL, var.order = list(), type,
 \item{round}{A value or vector for the number of significant figures to report the data to}
 
 \item{messages}{TRUE/FALSE report messages for missing row names in var.order}
+
+\item{zeros}{TRUE/FALSE whether to print zeros if none are found defaults to FALSE.}
 }
 \value{
 Returns a data.frame
