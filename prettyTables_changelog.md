@@ -14,3 +14,6 @@
 * Removed stata files.
 * Bug fixes to missing data
 * The code now checks that var.labels contain all values found in the variable and shoots a message if this is not true.
+
+## 1.2
+* Added table_percent function.

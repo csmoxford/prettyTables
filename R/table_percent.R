@@ -28,7 +28,7 @@ table_percent = function(x,y = NULL, direction = "row",total="both", useNA = "if
     tble2 = tble
 
 
-    if(direction == "h"){
+    if(direction == "row"){
       sm = rowSums(tble)
       tble2 = t(sapply(1:length(sm), function(x) paste0(tble[x,], "(", roundWZero(100 * tble[x,] / sm[x],rnd), "%)")))
       dimnames(tble2)[[1]] = dimnames(tble)[[1]]
