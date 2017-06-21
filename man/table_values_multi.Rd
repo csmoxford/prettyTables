@@ -57,4 +57,3 @@ vars = c("a","b")
 table_values_multi(data,vars,type = "st")
 
 }
-

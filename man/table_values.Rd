@@ -7,7 +7,7 @@
 table_values(data, var, var.names = NULL, var.order = list(), type,
   strata = NULL, strata.names = NULL, strata.count = TRUE,
   overall = TRUE, count = "n", round = 3, messages = TRUE,
-  zeros = FALSE)
+  zeros = TRUE)
 }
 \arguments{
 \item{data}{Dataset to generate table from}
@@ -69,4 +69,3 @@ strata="Species", type=c("miqr","miqr","miqr","miqr"), round=1)
 \seealso{
 \code{\link{table_two_by_two}}
 }
-

@@ -14,4 +14,3 @@ kableTable(what, dir = "h")
 \description{
 This is a wrapper function to allow kable to ouput a table with one input. Either a table or vector can be provided.
 }
-

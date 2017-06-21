@@ -73,4 +73,3 @@ var.name2="Sepal Length", type="miqr",strata="Petal.split", round=1)
 \seealso{
 \code{\link{table_values}}
 }
-

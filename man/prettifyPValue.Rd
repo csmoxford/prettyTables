@@ -23,4 +23,3 @@ prettifyPValue(pvalues, digits=2)
 # Three decimal places with a star for those less than 0.05
 prettifyPValue(pvalues, digits=3, signif=0.05)
 }
-
