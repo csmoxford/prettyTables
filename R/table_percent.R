@@ -15,7 +15,7 @@ table_percent = function(x,y = NULL, direction = "row",total="both", useNA = "if
     tble2 = table(x,useNA = useNA)
     sm = sum(tble2)
     dmnames = names(tble2)
-    tble2 = paste0(tble2, "(", roundWZero(100 * tble2 / sm,rnd), "%)")
+    tble2 = paste0(tble2, " (", roundWZero(100 * tble2 / sm,rnd), "%)")
 
     if(total %in% c("both","row","col")){
       tble2 = c(tble2, sm)
@@ -30,13 +30,13 @@ table_percent = function(x,y = NULL, direction = "row",total="both", useNA = "if
 
     if(direction == "row"){
       sm = rowSums(tble)
-      tble2 = t(sapply(1:length(sm), function(x) paste0(tble[x,], "(", roundWZero(100 * tble[x,] / sm[x],rnd), "%)")))
+      tble2 = t(sapply(1:length(sm), function(x) paste0(tble[x,], " (", roundWZero(100 * tble[x,] / sm[x],rnd), "%)")))
       dimnames(tble2)[[1]] = dimnames(tble)[[1]]
       dimnames(tble2)[[2]] = dimnames(tble)[[2]]
       class(tble2) = "table"
     } else {
       sm = colSums(tble)
-      tble2 = sapply(1:length(sm), function(x) paste0(tble[,x], "(", roundWZero(100 * tble[,x] / sm[x],rnd), "%)"))
+      tble2 = sapply(1:length(sm), function(x) paste0(tble[,x], " (", roundWZero(100 * tble[,x] / sm[x],rnd), "%)"))
       dimnames(tble2)[[1]] = dimnames(tble)[[1]]
       dimnames(tble2)[[2]] = dimnames(tble)[[2]]
       class(tble2) = "table"
