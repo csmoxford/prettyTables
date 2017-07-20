@@ -123,6 +123,6 @@ ConstructFlexTable$methods(
     InsertRow(afterIndex, values)
     i = afterIndex + 1
     isHeaderRow[i] <<- TRUE
-    SetFontStyleByRow(i)
+    SetFontStyleByRow(style = "bold",i)
   }
 )
