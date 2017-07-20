@@ -12,7 +12,8 @@ ConstructFlexTable$methods(
     }
     borderWidthVertical[,] <<- 0
     borderWidthHorizontal[,] <<- 0
-    SetBorderWidthHorizontalByRow(3,c(0,1,numRow))
+    SetBorderWidthHorizontalByRow(3,c(0,numRow))
+    SetBorderWidthHorizontalByRow(1.5,c(1))
     textAlign[,] <<- "right"
     fontColor[,] <<- "#000000"
     fontSize[,] <<- 11
