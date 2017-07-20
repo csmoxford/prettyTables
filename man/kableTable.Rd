@@ -4,13 +4,15 @@
 \alias{kableTable}
 \title{kableTable}
 \usage{
-kableTable(what, dir = "h")
+kableTable(what, dir = "h", horizontalColNames = c("Name", "Count"))
 }
 \arguments{
 \item{what}{A table or vector of data to tabulate}
 
 \item{dir}{Direction to produce table. "h" = horizonatl and anything else will be vertical. Default is "h".}
+
+\item{horizontalColNames}{A vector with length 2 used as column names if the table is vertical}
 }
 \description{
-This is a wrapper function to allow kable to ouput a table with one input. Either a table or vector can be provided.
+This is a wrapper function to allow kable to ouput a table with one input. This is not possible for current 1 dimensional tables. Either a table or vector can be provided.
 }

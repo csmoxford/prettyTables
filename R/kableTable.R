@@ -1,12 +1,14 @@
 #' kableTable
 #'
-#' This is a wrapper function to allow kable to ouput a table with one input. Either a table or vector can be provided.
+#' This is a wrapper function to allow kable to ouput a table with one input. This is not possible for current 1 dimensional tables. Either a table or vector can be provided.
 #'
 #' @param what A table or vector of data to tabulate
 #' @param dir Direction to produce table. "h" = horizonatl and anything else will be vertical. Default is "h".
+#' @param horizontalColNames A vector with length 2 used as column names if the table is vertical
 #'
 #' @export kableTable
-kableTable = function(what, dir="h"){
+#' @importFrom knitr kable
+kableTable = function(what, dir="h", horizontalColNames = c("Name","Count")){
 
   if(class(what)[1] != "table"){
     what = table(what)
@@ -26,7 +28,7 @@ kableTable = function(what, dir="h"){
     }
   }
 
-
+  names(df) <- horizontalColNames
 
   return(kable(df))
 }

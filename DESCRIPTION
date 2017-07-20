@@ -5,8 +5,9 @@ Version: 1.20
 Date: 2016-03-08
 Author: Peter Dutton
 Maintainer: Peter Dutton <peter.dutton@ndorms.ox.ac.uk>
-Description: Tabulation of summary statistics. A user interface is provided to assist with creating the tables and pushing them to a word document using the rtf package.
-Depends:
+Description: Tabulation of summary statistics. A user interface is provided to
+    assist with creating the tables and pushing them to a word document using the
+    rtf package.
 Imports:
     stringr
 License: GPL-2
