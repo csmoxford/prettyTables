@@ -101,6 +101,7 @@ GetFlexTable = function(...){
     # Note that row span does not work. To ensure correct border are used it is set to 1 for all entries.
     jpos = which(ct$colSpan[i,] != 0)
     ft <- addHeaderRow(ft, as.character(ct$data[i,jpos]),colspan = ct$colSpan[i,jpos])
+    rowSpan = ct$rowSpan
     ct$rowSpan[,] = 1
     for(j in jpos){
 
@@ -118,6 +119,7 @@ GetFlexTable = function(...){
                                                border.bottom.width = ct$borderWidthHorizontal[i + ct$rowSpan[i,j],j],
                                                padding = ct$padding[i,j])
     }
+    ct$rowSpan = rowSpan
 
     i = i + 1
   }

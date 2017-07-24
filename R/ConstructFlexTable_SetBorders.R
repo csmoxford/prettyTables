@@ -6,8 +6,12 @@ ConstructFlexTable$methods(
 )
 
 ConstructFlexTable$methods(
-  SetBorderWidthVerticalByColumn = function(width = 2, index) {
+  SetBorderWidthVerticalByColumn = function(width = 2, index = NULL) {
     "Set the Border width for vertical borders globally. Note an index of zero is the left most border and an index of numCol+1 is the rightmost border"
+    if(is.null(index)) {
+      stop("Expecting two parameters : width, index")
+    }
+
     for(j in index){
       borderWidthVertical[,j + 1] <<- width
     }
@@ -35,6 +39,9 @@ ConstructFlexTable$methods(
 ConstructFlexTable$methods(
   SetBorderWidthVerticalByMatchingOnRow = function(width = 2, i){
     "A wrapper for SetBorderWidthVerticalByMatching. Matches using data stored in the class with column index"
+    if(is.null(i)) {
+      stop("Expecting two parameters : width, i")
+    }
     SetBorderWidthVerticalByMatching(width, data[i,])
   }
 )
@@ -49,6 +56,9 @@ ConstructFlexTable$methods(
 ConstructFlexTable$methods(
   SetBorderWidthHorizontalByRow = function(width = 2, index) {
     "Set the Border width for vertical borders globally. Note an index of zero is the left most border and an index of numCol+1 is the rightmost border"
+    if(is.null(index)) {
+      stop("Expecting two parameters : width, index")
+    }
     for(i in index){
       borderWidthHorizontal[i + 1,] <<- width
     }
@@ -76,6 +86,9 @@ ConstructFlexTable$methods(
 ConstructFlexTable$methods(
   SetBorderWidthHorizontalByMatchingOnColumn = function(width = 2, j){
     "A wrapper for SetBorderWidthHorizontalByMatching. Matches using data stored in the class with column j"
+    if(is.null(j)) {
+      stop("Expecting two parameters : width, j")
+    }
     SetBorderWidthHorizontalByMatching(width, data[,j])
   }
 )

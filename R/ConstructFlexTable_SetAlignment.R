@@ -11,7 +11,10 @@ ConstructFlexTable$methods(
 ConstructFlexTable$methods(
   SetTextAlignColByIndex = function(align = "left", index) {
     "Set the text alignment of a specific column or columns. align should be one of 'left', 'right', 'center', 'justify'."
-    if(align == "centre"){
+    if(is.null(index)) {
+      stop("Expecting two parameters : align, index")
+    }
+    if(align == "Centre"){
       align = "center"
     }
     for(j in index){
@@ -23,8 +26,10 @@ ConstructFlexTable$methods(
 ConstructFlexTable$methods(
   SetTextAlignRowByIndex = function(align = "left", index) {
     "Set the text alignment of a specific row or rows. align should be one of 'left', 'right', 'center', 'justify'."
-
-    if(align == "centre"){
+    if(is.null(index)) {
+      stop("Expecting two parameters : align, index")
+    }
+    if(align == "Centre"){
       align = "center"
     }
     for(i in index){
