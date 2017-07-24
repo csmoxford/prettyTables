@@ -30,10 +30,7 @@ bft$GetTable()
 bft$CutRows(c(6:10))
 
 bft$GetTable()
-
-# And will then need to update the row span.
-bft$SetSpanRowByColumn(j = 1)
-bft$GetTable()
+# We may then need to update the row span. Not in this case. It will depend on which rows are cut.
 
 # Lets create some header rows
 headft = ConstructFlexTable(data = matrix(c(
@@ -79,6 +76,6 @@ headft$SetHeaderRowByIndex(index = c(1,2))
 # We do however lose any (vertical) row spans now because each row is processed using addHeaderRow (ReporteRs)
 ft = headft$GetTable(bft)
 ft
-
+headft$GetTable()
 # It might have been quicker here to use the InsertHeaderRow function on the original object prior to formatting.
 }

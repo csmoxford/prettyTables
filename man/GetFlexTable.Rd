@@ -9,8 +9,9 @@ GetFlexTable(...)
 \arguments{
 \item{...}{\code{\link{ConstructFlexTable}} objects}
 }
-\details{
+\description{
 Creates a \code{\link{FlexTable}} object using \code{\link{ConstructFlexTable}} objects. Multiple objects can be appended provided they have the same number of rows.
-
+}
+\details{
 This requires ReporteRs to be installed and ReporteRs requires a java JDK to be installed to work correcly.
 }
