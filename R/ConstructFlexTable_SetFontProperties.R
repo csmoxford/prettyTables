@@ -48,6 +48,9 @@ ConstructFlexTable$methods(
 ConstructFlexTable$methods(
   SetFontStyleByRow = function(style = "bold", index) {
     "Set the font style by row. Style should be one of 'normal', 'italic', 'bold'. Only the first letter is currently used so shorthand is possible."
+    if(is.null(index)) {
+      stop("Expecting two parameters : style, index")
+    }
     for(i in index) {
       fontStyle[i,] <<- rep(style,numCol)
     }

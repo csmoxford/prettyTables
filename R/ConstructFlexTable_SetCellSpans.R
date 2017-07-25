@@ -1,8 +1,11 @@
 
 
 ConstructFlexTable$methods(
-  SetSpanRowByRange = function(j, from, to) {
+  SetSpanRowByRange = function(j, from = NULL, to = NULL) {
     "On column j sets rowSpan between from and to."
+    if(is.null(from) | is.null(to)) {
+      stop("Expecting three parameters : width, from, to")
+    }
     rowSpan[from:to,j] <<- 0
     rowSpan[from,j] <<- to - from + 1
   }
@@ -42,6 +45,9 @@ ConstructFlexTable$methods(
 ConstructFlexTable$methods(
   SetSpanColumnByRange = function(i, from, to) {
     "On row i sets colSpan between from and to."
+    if(is.null(from) | is.null(to)) {
+      stop("Expecting three parameters : width, from, to")
+    }
     colSpan[i,from:to] <<- 0
     colSpan[i,from] <<- to - from + 1
   }

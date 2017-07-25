@@ -4,11 +4,11 @@
 #'
 #' @param what A table or vector of data to tabulate
 #' @param dir Direction to produce table. "h" = horizonatl and anything else will be vertical. Default is "h".
-#' @param horizontalColNames A vector with length 2 used as column names if the table is vertical
+#' @param verticalColNames A vector with length 2 used as column names if the table is vertical
 #'
 #' @export kableTable
 #' @importFrom knitr kable
-kableTable = function(what, dir="h", horizontalColNames = c("Name","Count")){
+kableTable = function(what, dir="h", verticalColNames = c("Name","Count")){
 
   if(class(what)[1] != "table"){
     what = table(what)
@@ -26,9 +26,10 @@ kableTable = function(what, dir="h", horizontalColNames = c("Name","Count")){
     for(i in 1:length(what)){
       df[i,] = c(names(what)[i],what[i])
     }
+    names(df) <- verticalColNames
   }
 
-  names(df) <- horizontalColNames
+
 
   return(kable(df))
 }
