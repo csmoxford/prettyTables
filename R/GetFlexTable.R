@@ -41,6 +41,7 @@ GetFlexTable = function(...){
     for(i in 1:ct$numRow) {
       if(!ct$isHeaderRow[i]){
         for(j in 1:ct$numCol) {
+
           if(ct$rowSpan[i,j] > 1) {
             ft = spanFlexTableRows(ft,j,rowID + i - headCount,rowID + i  - headCount + ct$rowSpan[i,j]-1)
           }
@@ -64,8 +65,7 @@ GetFlexTable = function(...){
     for(i in 1:ct$numRow) {
       if(!ct$isHeaderRow[i]){
         for(j in 1:ct$numCol) {
-          if(ct$colSpan[i - headCount,j] > 0 && ct$rowSpan[i,j] > 0) {
-
+          if(ct$colSpan[i,j] > 0 && ct$rowSpan[i,j] > 0) {
             ft[rowID + i - headCount,j] <- ct$data[i,j]
             # print(c(i,j,ct$colSpan))
             ft[rowID + i - headCount,j] <- parProperties(text.align = ct$textAlign[i,j])
